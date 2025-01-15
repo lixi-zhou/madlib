@@ -151,6 +151,8 @@ class InputValidator:
                 result = plpy.execute(query)
                 result = result[0]['shape']
                 shapes.append(result)
+        # fix inconsistent shape
+        input_shape = [input_shape[0]]                
         _assert(len(shapes) == len(input_shape),
             "model_keras error: The number of dimensions ({0}) of each image"
             " in model architecture and {1} in {2} ({3}) do not match.".format(

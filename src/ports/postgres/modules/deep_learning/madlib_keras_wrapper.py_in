@@ -389,7 +389,7 @@ def get_optimizers():
         optimizer = eval('opt.' + n)
         if isinstance(optimizer.__class__,type) and \
             '__module__' in dir(optimizer) and \
-            'keras.optimizers' in optimizer.__module__:
+            'keras.optimizer' in optimizer.__module__:
             optimizers[n] = optimizer
     return optimizers
 
