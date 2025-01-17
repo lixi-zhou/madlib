@@ -468,6 +468,8 @@ def xgboost_predict(schema_madlib, scoring_tbl, mdl_table, mdl_output_tbl,
     pred = pd.Series(y_pred_test, index = X_test.index).to_frame(predicted_class_label)
 
     num_unique_classes = int(pd.DataFrame(data=pred[predicted_class_label]).apply(lambda x: len(x.unique())))
+    # Patch fix: to use the shape from predictions results
+    num_unique_classes = y_pred_proba_test.shape[1]
 
     if (range(num_unique_classes) == [0]):
         plpy.error('XGBoost: Every prediction is of the same class.')
